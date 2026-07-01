@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = 'https://user-registration-frontend-production.up.railway.app/api';
+const API_URL = 'https://user-registration-frontend-production.up.railway.app/api'; // Replace with your backend API URL
 
 const api = axios.create({
     baseURL: API_URL,
