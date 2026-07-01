@@ -1,0 +1,162 @@
+/* استيراد خطوط جوجل */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
+.Landing-body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', 'Poppins', sans-serif;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* حاوية الخلفية المصورة مع تأثير الـ Blur */
+.bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* حط مسار صورتك هنا */
+    background-image: url('https://picsum.photos/1920/1080');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
+    transform: scale(1.1);
+    /* لمنع الحواف البيضاء */
+    z-index: -2;
+}
+
+.bg-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.main-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+/* اللوجو في الزاوية فوق على الشمال */
+.top-logo {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #287791;
+    border-radius: 50%;
+    position: relative;
+}
+
+.logo-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    background-color: #287791;
+    border-radius: 50%;
+}
+
+.logo-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #287791;
+    font-size: 1.2rem;
+}
+
+/* الكارد المحتوي على الكلام */
+.login-card {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 50px 40px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 550px;
+    width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.app-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #287791;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.app-description {
+    font-size: 1.15rem;
+    color: #4a5568;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    font-family: 'Cairo', sans-serif;
+}
+
+.button-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-direction: row-reverse;
+    /* لترتيب الأزرار بشكل صحيح من اليمين لليسار */
+}
+
+.btn {
+    padding: 12px 35px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-family: 'Cairo', sans-serif;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #287791;
+    color: white;
+    border: 2px solid #287791;
+}
+
+.btn-primary:hover {
+    background-color: #1c5467;
+    border-color: #1c5467;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 119, 145, 0.3);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #287791;
+    border: 2px solid #287791;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(40, 119, 145, 0.08);
+    transform: translateY(-2px);
+}
