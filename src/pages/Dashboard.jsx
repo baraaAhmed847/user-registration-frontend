@@ -9,7 +9,7 @@ function Dashboard() {
     useEffect(() => {
         const token = localStorage.getItem('token');
 
-        fetch('http://localhost:5000/api/profile', {
+        fetch('https://user-registration-frontend-production.up.railway.app/api/profile', {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((res) => res.json())
@@ -21,7 +21,8 @@ function Dashboard() {
         const token = localStorage.getItem('token');
 
         try {
-            await fetch('http://localhost:5000/api/logout', {
+            await fetch('/api/logout', {
+
                 method: 'POST',
                 headers: { Authorization: `Bearer ${token}` },
             });

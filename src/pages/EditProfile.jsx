@@ -13,7 +13,7 @@ function EditProfile() {
     useEffect(() => {
         const token = localStorage.getItem('token');
 
-        fetch('http://localhost:5000/api/profile', {
+        fetch('https://user-registration-frontend-production.up.railway.app/api/profile', {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((res) => res.json())
@@ -31,7 +31,7 @@ function EditProfile() {
         const token = localStorage.getItem('token');
 
         try {
-            const res = await fetch('http://localhost:5000/api/profile', {
+            const res = await fetch('https://user-registration-frontend-production.up.railway.app/api/profile', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ function EditProfile() {
             const data = await res.json();
 
             if (!res.ok) {
-               setError(data.error || 'حدث خطأ...');
+                setError(data.error || 'حدث خطأ...');
                 return;
             }
 
