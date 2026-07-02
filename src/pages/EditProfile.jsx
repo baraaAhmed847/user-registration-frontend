@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Landing.css';
 import './Login.css';
+import api from '../api';
 
 function EditProfile() {
     const navigate = useNavigate();
@@ -11,15 +12,10 @@ function EditProfile() {
     const [success, setSuccess] = useState('');
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-
-        fetch('https://user-registration-frontend-production.up.railway.app/api/profile', {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setName(data.name || '');
-                setEmail(data.email || '');
+        api.get('/profile')
+            .then((res) => {
+                setName(res.data.name || '');
+                setEmail(res.data.email || '');
             })
             .catch(() => setError('تعذر تحميل بيانات الملف الشخصي'));
     }, []);
@@ -28,28 +24,12 @@ function EditProfile() {
         e.preventDefault();
         setError('');
         setSuccess('');
-        const token = localStorage.getItem('token');
 
         try {
-            const res = await fetch('https://user-registration-frontend-production.up.railway.app/api/profile', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({ name, email }),
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                setError(data.error || 'حدث خطأ...');
-                return;
-            }
-
+            const res = await api.put('/profile', { name, email });
             setSuccess('تم تحديث بياناتك بنجاح');
         } catch (err) {
-            setError('تعذر الاتصال بالسيرفر');
+            setError(err.response?.data?.error || 'حدث خطأ...');
         }
     };
 

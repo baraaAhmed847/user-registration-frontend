@@ -21,9 +21,10 @@ function Register() {
         e.preventDefault();
         setError('');
         setLoading(true);
+        const API_URL = process.env.REACT_APP_API_URL + '/api' || 'http://localhost:5000/api';
 
         try {
-            const response = await api.post('/register', formData);
+            const response = await api.post(`${API_URL}/register`, formData);
             localStorage.setItem('token', response.data.token || '');
             navigate('/login');
         } catch (err) {

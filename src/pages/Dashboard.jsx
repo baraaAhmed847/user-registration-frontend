@@ -1,34 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Landing.css';
+import api from '../api';
 
 function Dashboard() {
     const navigate = useNavigate();
     const [userName, setUserName] = useState('');
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-
-        fetch('https://user-registration-frontend-production.up.railway.app/api/profile', {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-            .then((res) => res.json())
-            .then((data) => setUserName(data.name || ''))
+        api.get('/profile')
+            .then((res) => setUserName(res.data.name || ''))
             .catch(() => { });
     }, []);
 
     const handleLogout = async () => {
-        const token = localStorage.getItem('token');
-
         try {
-            await fetch('/api/logout', {
-
-                method: 'POST',
-                headers: { Authorization: `Bearer ${token}` },
-            });
-        } catch (err) {
-            // حتى لو فشل النداء، هنمسح التوكن ونخرج المستخدم
-        }
+            await api.post('/logout');
+        } catch (err) { }
 
         localStorage.removeItem('token');
         navigate('/login');
